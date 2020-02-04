@@ -12,3 +12,6 @@ fi
 if [ ! -d $HOME/src/st ]; then
 	git clone git://git.suckless.org/st $HOME/src/st
 fi
+
+
+chsh -s /usr/local/bin/zsh
