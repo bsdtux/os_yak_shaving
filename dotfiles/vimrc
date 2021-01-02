@@ -1,0 +1,16 @@
+" Set line numbers
+set number
+
+" Rebind <Leader> Key to q instead of \
+let mapleader = "q"
+
+" Bind Ctrl+{movement} instead of Ctrl+w+{movement}
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" Easier Tab movement
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+
