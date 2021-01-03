@@ -1,6 +1,9 @@
 " Set line numbers
 set number
 
+" Set column length
+set colorcolumn=120
+
 " Rebind <Leader> Key to q instead of \
 let mapleader = "q"
 
@@ -14,3 +17,11 @@ map <c-h> <c-w>h
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
+" Easier code block movement
+vnoremap < <gv " better deindentation
+vnoremap > >gv " better indendatation
+
+" Disable backups
+set nobackup
+set nowritebackup
+set noswapfile
