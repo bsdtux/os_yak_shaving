@@ -7,6 +7,7 @@ else
 endif
 
 let python_highlight_all=1
+let g:SimpylFold_docstring_preview=1
 
 autocmd BufWritePost *.py execute ':Black'
 autocmd BufWritePost *.py execute ':Isort'

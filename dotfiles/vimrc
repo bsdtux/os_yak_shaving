@@ -18,6 +18,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Valloric/YouCompleteMe'
 
+Plugin 'scrooloose/nerdtree'
+Plugin 'tmhedberg/SimpylFold'
+
 " Python specific plugins
 Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
@@ -45,7 +48,7 @@ set number
 set colorcolumn=120
 
 " Rebind <Leader> Key to q instead of \
-let mapleader = "q"
+let mapleader = "y"
 
 " Bind Ctrl+{movement} instead of Ctrl+w+{movement}
 map <c-j> <c-w>j
@@ -68,3 +71,9 @@ set noswapfile
 
 " Turn on syntax highlighting
 syntax on
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+set encoding=utf-8
+
