@@ -106,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Pyenv Shims
-export PATH="$HOME/.pyenv/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
@@ -116,3 +116,15 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# GO Lang
+export PATH=$PATH:/usr/local/go/bin
+
+function yfl() {
+	if [ -f ./yarn.lock ]; then
+		yarn --forzen-lockfile
+	fi
+}
+
+alias gitcount="git rev-list main.. --count"
+alias gitrbi="git rebase --interactive"
