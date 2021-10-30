@@ -9,17 +9,19 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/joshstephens/.oh-my-zsh"
+export ZSH="/Users/joshstephens/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+#ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="spaceship"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -33,14 +35,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -71,11 +67,13 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,6 +94,9 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -105,26 +106,58 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Pyenv Shims
-export PATH="$HOME/.local/bin:$HOME/.pyenv/bin:$PATH"
+# Adds pyenv auto completions
+if [ -f /usr/local/share/zsh/site-functions/pyenv.zsh ]; then
+	. /usr/local/share/zsh/site-functions/pyenv.zsh
+fi
+
+export PYENV_ROOT=/usr/local/opt/pyenv/
+export PATH="$HOME/.emacs.d/bin:$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# Nvm Shims
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export GOPATH=$HOME/go
+export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin
+
+# Postgres Server Commands
+alias start_pgsql="pg_ctl -D /usr/local/var/postgres -l logfile start"
+alias stop_pgsql="pg_ctl -D /usr/local/var/postgres stop"
+
+# Mysql Server commands
+alias start_mysql="/usr/local/opt/mysql@5.6/bin/mysql.server start"
+alias stop_mysql="/usr/local/opt/mysql@5.6/bin/mysql.server stop"
+
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+eval "$(rbenv init -)"
+
+alias gitpu="git push --set-upstream origin"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias drimg="docker images | awk '{print $3}' | awk '{if(NR>1)print}' | xargs docker image rm"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias mongo_start="brew services start mongodb/brew/mongodb-community"
+alias mongo_stop="brew services stop mongodb/brew/mongodb-community"
+
+# Added by serverless binary installer
+export PATH="$HOME/.local/bin:$HOME/.serverless/bin:$PATH"
+
+pypkg() {
+    mkdir $1
+    touch $1/__init__.py
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# GO Lang
-export PATH=$PATH:/usr/local/go/bin
+# DrRacket
+export PATH=/Applications/Racket\ v8.0/bin:$PATH
 
-function yfl() {
-	if [ -f ./yarn.lock ]; then
-		yarn --forzen-lockfile
-	fi
-}
 
-alias gitcount="git rev-list main.. --count"
-alias gitrbi="git rebase --interactive"
+alias gcma="git commit -a"
+alias cgota="cargo test -- --include-ignored"
