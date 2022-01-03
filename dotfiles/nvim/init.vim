@@ -38,7 +38,7 @@ set nobackup nowritebackup
 "--------------------------------------------------------------------------
 
 let mapleader = "\<space>"
-
+let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " Automatically install vim-plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -50,12 +50,12 @@ endif
 call plug#begin(data_dir . '/plugins')
 
 " Feature Files
-source ./splits.vim
+exec 'source' s:path . '/splits.vim'
 
 " Plugins
-source ./plugins/dracula.vim
-source ./plugins/nerdtree.vim
-source ./plugins/fzf.vim
+exec 'source' s:path . '/plugins/dracula.vim'
+exec 'source' s:path . '/plugins/nerdtree.vim'
+exec 'source' s:path . '/plugins/fzf.vim'
 
 call plug#end()
 doautocmd User PlugLoaded
