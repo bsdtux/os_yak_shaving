@@ -20,7 +20,9 @@
 "                                  \::/    /        
 "                                   \/____/         
                                            
-
+"--------------------------------------------------------------------------
+" Core Changes
+"--------------------------------------------------------------------------
 set number
 syntax on
 
@@ -34,10 +36,8 @@ set nowrap
 set nobackup nowritebackup
 
 "--------------------------------------------------------------------------
-" Key maps
+" Set Source Path and Install Vim-plug
 "--------------------------------------------------------------------------
-
-let mapleader = "\<space>"
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " Automatically install vim-plug
@@ -47,15 +47,29 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+
 call plug#begin(data_dir . '/plugins')
 
-" Feature Files
+"--------------------------------------------------------------------------
+" Core Vim Changes
+"--------------------------------------------------------------------------
 exec 'source' s:path . '/splits.vim'
+exec 'source' s:path . '/keybindings.vim'
 
+
+"--------------------------------------------------------------------------
 " Plugins
+"--------------------------------------------------------------------------
 exec 'source' s:path . '/plugins/dracula.vim'
 exec 'source' s:path . '/plugins/nerdtree.vim'
 exec 'source' s:path . '/plugins/fzf.vim'
+exec 'source' s:path . '/plugins/coc.vim'
+
+"--------------------------------------------------------------------------
+" Lua Scripts
+"--------------------------------------------------------------------------
+"exec 'luafile' s:path . '/lua/python.lua'
+
 
 call plug#end()
 doautocmd User PlugLoaded
