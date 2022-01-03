@@ -6,6 +6,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ln -sf ./tmux.conf $HOME/.tmux.conf
 ln -sf ./zshrc $HOME/.zshrc
+ln -sf ./nvim $HOME/.config/nvim
 
 mkdir -p $HOME/.fonts
 cp -r ./*.ttf $HOME/.fonts/
+
