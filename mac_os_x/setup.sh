@@ -6,16 +6,21 @@ xcode-select --install
 echo "Installing Homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-echo "Installing zshrc file"
-cp ./.zshrc ~/
+echo "Install Tmux"
+brew install tmux
 
-echo "Sourcing zshrc file"
-. ~/.zshrc
+echo "Installing TPM
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-echo "Installing bundles"
-brew bundle
+echo "Installing NeoVim"
+brew install neovim
 
-pyenv install 3.6.6
-pyenv install 3.7.5
+echo "Installing oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cp ./.zshrc ~/.zshrc
 
-pyenv global 3.7.5
+source ~/.zshrc
+
+echo "Installing powerlevel10k"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+cp ../dotfiles/zshrc ~/.zshrc
