@@ -35,6 +35,7 @@ return packer.startup(function(use)
 
     -- essential plugins
     use("tpope/vim-surround") -- easily surround text 
+    use("tpope/vim-fugitive") -- neovim git integration
     use("vim-scripts/ReplaceWithRegister")
 
     -- comment out gc
